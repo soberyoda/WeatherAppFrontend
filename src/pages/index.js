@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
-import WeatherForecastTable from './weather_forecast_table';
+import WeatherForecastTable from "./weather_forecast_table";
 const Home = () => {
   const [weatherData, setWeatherData] = useState(null);
 
@@ -15,10 +15,10 @@ const Home = () => {
                   setWeatherData(data);
               })
               .catch(error => {
-                  console.error('Błąd podczas pobierania prognozy pogody:', error);
+                  console.error('Error while fetching weather forecast:', error);
               });
       }, function(error) {
-          console.error('Błąd podczas uzyskiwania lokalizacji:', error);
+          console.error('Error while obtaining location:', error);
       });
   }, []);
   return (
