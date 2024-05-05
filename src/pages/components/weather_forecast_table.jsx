@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
-import getWeatherIcon from './weatherIcons';
+import getWeatherIcon from './weatherIcons'
 
 const WeatherForecastTable = ({ weatherData }) => {
     if (!weatherData) {
