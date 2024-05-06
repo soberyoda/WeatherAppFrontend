@@ -63,7 +63,7 @@ const WeatherForecastTable = ({ weatherData }) => {
               )}
               <TableRow>
                 <TableCell align='center' style={{color:'#000000'}}>
-                  {index === 0 && isMobile ? "Next Days" : day.date}
+                  {index === 0 && isMobile ? "Next Days" : new Date(day.date).toLocaleDateString('en-GB')}
                 </TableCell>
                 {!isMobile && (
                   <>
