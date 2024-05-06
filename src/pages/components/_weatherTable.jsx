@@ -3,32 +3,31 @@ import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper
 import { useTheme } from '@mui/material/styles';
 import getWeatherIcon from './_weatherIcons';
 
-const WeatherTile = ({ day }) => {
-  return (
-    <Paper elevation={3} style={{ padding: '15px', marginBottom: '20px' }}>
-      <Typography variant="h6" style={{ marginBottom: '10px', color: '#7d7574' }}>Details for {day.date}</Typography>
-      <List>
-        <ListItem>
-          <ListItemText primary={`Max Temperature: ${day.maxTemperature}`} 
-            primaryTypographyProps={{ style: { color: '#7d7574' } }}/>
-        </ListItem>
-        <ListItem>
-          <ListItemText primary={`Min Temperature: ${day.minTemperature}`} 
-            primaryTypographyProps={{ style: { color: '#7d7574' } }}/>
-        </ListItem>
-        <ListItem>
-          <ListItemText primary={`Weather Icon:`} 
-            primaryTypographyProps={{ style: { color: '#7d7574' } }}/>{getWeatherIcon(day.weatherCode)}
-        </ListItem>
-        <ListItem>
-          <ListItemText primary={`Estimated Energy (kW): ${day.estimatedEnergy}`} 
-            primaryTypographyProps={{ style: { color: '#7d7574' } }}/>
-        </ListItem>
-      </List>
-    </Paper>
-  );
-};
-
+const WeatherTile = ({ day, isToday }) => {
+    return (
+      <Paper elevation={3} style={{ padding: '15px', marginBottom: '20px',  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item xs={6} sm={3}>
+            <Typography variant="body1" style={{ color: '#7d7574' }}>Max Temperature:</Typography>
+            <Typography variant="body1">{day.maxTemperature} ℃</Typography>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Typography variant="body1" style={{ color: '#7d7574' }}>Min Temperature:</Typography>
+            <Typography variant="body1">{day.minTemperature} ℃</Typography>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Typography variant="body1" style={{ color: '#7d7574' }}>Weather Icon:</Typography>
+            {getWeatherIcon(day.weatherCode)}
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Typography variant="body1" style={{ color: '#7d7574' }}>Estimated Energy (kW):</Typography>
+            <Typography variant="body1">{day.estimatedEnergy}</Typography>
+          </Grid>
+        </Grid>
+      </Paper>
+    );
+  };
+  
 const WeatherForecastTable = ({ weatherData }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -42,7 +41,7 @@ const WeatherForecastTable = ({ weatherData }) => {
       <Table>
         <TableHead>
           <TableRow style={{background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'}}>
-            <TableCell align='center' style={{color:'white'}}>Date</TableCell>
+            <TableCell align='center' style={{color:'white'}}>{isMobile? "Today" : Date}</TableCell>
             {!isMobile && (
               <>
                 <TableCell align='center' style={{color:'white'}}>Weather Icon</TableCell>
@@ -58,11 +57,13 @@ const WeatherForecastTable = ({ weatherData }) => {
             <React.Fragment key={day.date}>
               {isMobile && index === 0 && (
                 <Grid item xs={12}>
-                  <WeatherTile day={day} />
+                  <WeatherTile day={day} isToday={true} />
                 </Grid>
               )}
               <TableRow>
-                <TableCell align='center' style={{color:'#7d7574'}}>{day.date}</TableCell>
+                <TableCell align='center' style={{color:'#000000'}}>
+                  {index === 0 ? "Next Days" : day.date}
+                </TableCell>
                 {!isMobile && (
                   <>
                     <TableCell align='center' style={{color:'#7d7574'}}>{getWeatherIcon(day.weatherCode)}</TableCell>
@@ -72,6 +73,31 @@ const WeatherForecastTable = ({ weatherData }) => {
                   </>
                 )}
               </TableRow>
+              {isMobile && index !== 0 && (
+                    <TableRow>
+                    <TableCell colSpan={5} align='center'>
+                        <Grid container spacing={2} justifyContent="space-around">
+                            <Grid item xs={6} sm={3}>
+                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>Max Temp:</Typography>
+                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>{day.maxTemperature} ℃</Typography>
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>Min Temp:</Typography>
+                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>{day.minTemperature} ℃</Typography>
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>Weather Icon:</Typography>
+                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>{getWeatherIcon(day.weatherCode)}</Typography>
+                            </Grid>
+                            <Grid item xs={6} sm={3}>
+                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>Estimated Energy:</Typography>
+                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>{day.estimatedEnergy}</Typography>
+                            </Grid>
+                        </Grid>
+                    </TableCell>
+                </TableRow>
+            
+              )}
             </React.Fragment>
           ))}
         </TableBody>
