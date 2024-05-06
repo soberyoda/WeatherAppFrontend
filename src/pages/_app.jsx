@@ -1,24 +1,42 @@
 import React from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles'; 
 import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+import { makeStyles } from '@mui/styles'; 
+import { purple } from '@mui/material/colors';
+import { GlobalStyles } from '@mui/material';
 
+const theme = createTheme({
+  palette: {
+    primary: purple,
+  },
+});
 
-function App({ Component, pageProps }) {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex', 
+    justifyContent: 'center', 
+  },
+  '@global': {
+    body: {
+      minHeight: '100vh',
+      backgroundImage: 'radial-gradient(circle at 10% 20%, rgb(215, 223, 252) 0%, rgb(255, 255, 255) 0%, rgb(215, 223, 252) 84%)',
+      margin: 0,
+      padding: 0,
+    },
+  },
+}));
+
+const App = ({ Component, pageProps }) => {
+  const classes = useStyles();
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth="sm">
-        <Box sx={{ my: 4 }}>
-          <Component {...pageProps} />
-        </Box>
-      </Container>
-    </>
+      <GlobalStyles />
+      <div className={classes.root}>
+        <Component {...pageProps} />
+      </div>
+    </ThemeProvider>
   );
 }
-
-
 
 export default App;
