@@ -10,18 +10,21 @@ const Home = () => {
 
   return (
     <Box textAlign="center" padding={2}>
-      <Paper elevation={3} sx={{ padding: '20px' }}>
-        <Typography 
+      <Paper elevation={3} sx={{ padding: '20px', background:'#b1c6f9'}}>
+      <Typography 
           variant={isMobile ? "h4" : "h3"} 
           sx={{
             textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-            padding: '10px'  // Adjust padding as needed
+            marginBottom: '20px',
+            background: '-webkit-linear-gradient(#667eea, #764ba2)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
           }}
         >
-          Weather Forecast
+            Weather Forecast
         </Typography>
+        <WeatherForecastTable weatherData={weatherData} />
       </Paper>
-      <WeatherForecastTable weatherData={weatherData} />
     </Box>
   );
 };

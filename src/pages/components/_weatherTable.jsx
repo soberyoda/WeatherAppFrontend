@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, useMediaQuery, Typography, List, ListItem, ListItemText, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import getWeatherIcon from './_weatherIcons';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const WeatherTile = ({ day, isToday }) => {
+const WeatherTile = ({ day }) => {
     return (
-      <Paper elevation={3} style={{ padding: '15px', marginBottom: '20px',  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}>
+      <Paper elevation={3} style={{ padding: '15px', marginBottom: '20px',  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)'}}>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={6} sm={3}>
             <Typography variant="body1" style={{ color: '#7d7574' }}>Max Temperature:</Typography>
@@ -20,8 +21,8 @@ const WeatherTile = ({ day, isToday }) => {
             {getWeatherIcon(day.weatherCode)}
           </Grid>
           <Grid item xs={6} sm={3}>
-            <Typography variant="body1" style={{ color: '#7d7574' }}>Estimated Energy (kW):</Typography>
-            <Typography variant="body1">{day.estimatedEnergy}</Typography>
+            <Typography variant="body1" style={{ color: '#7d7574' }}>Estimated Energy:</Typography>
+            <Typography variant="body1">{day.estimatedEnergy} kWh</Typography>
           </Grid>
         </Grid>
       </Paper>
@@ -33,7 +34,7 @@ const WeatherForecastTable = ({ weatherData }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   if (!weatherData) {
-    return <p>Loading...</p>;
+    return <CircularProgress color="secondary" />;
   }
 
   return (
@@ -41,13 +42,13 @@ const WeatherForecastTable = ({ weatherData }) => {
       <Table>
         <TableHead>
           <TableRow style={{background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'}}>
-            <TableCell align='center' style={{color:'white'}}>{isMobile? "Today" : Date}</TableCell>
+            <TableCell align='center' style={{color:'white'}}>{isMobile ? "Today" : "Date"}</TableCell>
             {!isMobile && (
               <>
                 <TableCell align='center' style={{color:'white'}}>Weather Icon</TableCell>
                 <TableCell align='center' style={{color:'white'}}>Max Temperature</TableCell>
                 <TableCell align='center' style={{color:'white'}}>Min Temperature</TableCell>
-                <TableCell align='center' style={{color:'white'}}>Estimated Energy (kWh)</TableCell>
+                <TableCell align='center' style={{color:'white'}}>Estimated Energy</TableCell>
               </>
             )}
           </TableRow>
@@ -62,14 +63,14 @@ const WeatherForecastTable = ({ weatherData }) => {
               )}
               <TableRow>
                 <TableCell align='center' style={{color:'#000000'}}>
-                  {index === 0 ? "Next Days" : day.date}
+                  {index === 0 && isMobile ? "Next Days" : day.date}
                 </TableCell>
                 {!isMobile && (
                   <>
                     <TableCell align='center' style={{color:'#7d7574'}}>{getWeatherIcon(day.weatherCode)}</TableCell>
-                    <TableCell align='center' style={{color:'#7d7574'}}>{day.maxTemperature}</TableCell>
-                    <TableCell align='center' style={{color:'#7d7574'}}>{day.minTemperature}</TableCell>
-                    <TableCell align='center' style={{color:'#7d7574'}}>{day.estimatedEnergy}</TableCell>
+                    <TableCell align='center' style={{color:'#7d7574'}}>{day.maxTemperature} ℃</TableCell>
+                    <TableCell align='center' style={{color:'#7d7574'}}>{day.minTemperature} ℃</TableCell>
+                    <TableCell align='center' style={{color:'#7d7574'}}>{day.estimatedEnergy} kWh</TableCell>
                   </>
                 )}
               </TableRow>
@@ -91,7 +92,7 @@ const WeatherForecastTable = ({ weatherData }) => {
                             </Grid>
                             <Grid item xs={6} sm={3}>
                                 <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>Estimated Energy:</Typography>
-                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>{day.estimatedEnergy}</Typography>
+                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>{day.estimatedEnergy} kWh</Typography>
                             </Grid>
                         </Grid>
                     </TableCell>
