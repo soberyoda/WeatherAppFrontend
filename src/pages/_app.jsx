@@ -1,42 +1,43 @@
-import React from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles'; 
-import CssBaseline from '@mui/material/CssBaseline';
-import { makeStyles } from '@mui/styles'; 
-import { purple } from '@mui/material/colors';
-import { GlobalStyles } from '@mui/material';
-
-const theme = createTheme({
+import React, { useState } from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { purple } from "@mui/material/colors";
+import { GlobalStyles } from "@mui/material";
+import Home from "./index"; 
+const light = createTheme({
   palette: {
     primary: purple,
+    background: {
+      default: "#d0f2f7"
+    } 
   },
 });
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex', 
-    justifyContent: 'center', 
+const dark = createTheme({
+  palette: {
+    primary: purple,
+    background: {
+      default: "#4e549d"
+    } 
   },
-  '@global': {
-    body: {
-      minHeight: '100vh',
-      backgroundImage: 'radial-gradient(circle at 10% 20%, rgb(215, 223, 252) 0%, rgb(255, 255, 255) 0%, rgb(215, 223, 252) 84%)',
-      margin: 0,
-      padding: 0,
-    },
-  },
-}));
+});
 
-const App = ({ Component, pageProps }) => {
-  const classes = useStyles();
+
+
+const App = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => !prevMode);
+  };
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkMode ? dark : light}>
       <CssBaseline />
       <GlobalStyles />
-      <div className={classes.root}>
-        <Component {...pageProps} />
-      </div>
+      <Home toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
     </ThemeProvider>
   );
-}
+};
 
 export default App;

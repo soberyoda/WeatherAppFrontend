@@ -9,14 +9,14 @@ import {
     FlashOn
 } from '@mui/icons-material';
 
-const getWeatherIcon = (weatherCode) => {
+const getWeatherIcon = (weatherCode, darkMode) => {
     switch (weatherCode) {
         case 0:
-            return <WbSunny style={{color:"#e985f7"}}/>; // Clear sky
+            return <WbSunny style={{color: darkMode? "#ffdc34":"#e985f7"}}/>; // Clear sky
         case 1:
         case 2:
         case 3:
-            return <CloudQueue style={{color:"#7b66bc"}}/>; // Mainly clear, partly cloudy, and overcast
+            return <CloudQueue style={{color: darkMode? "#ffb0ce":"#7b66bc"}}/>; // Mainly clear, partly cloudy, and overcast
         case 45:
         case 48:
         case 51:

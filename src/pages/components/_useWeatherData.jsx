@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const useWeatherData = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -10,11 +10,13 @@ const useWeatherData = () => {
           navigator.geolocation.getCurrentPosition(resolve, reject);
         });
         const { latitude, longitude } = position.coords;
-        const response = await fetch(`https://weatherapp-xi8f.onrender.com/weather/forecast/${latitude}/${longitude}`);
+        const response = await fetch(
+          `https://weatherapp-xi8f.onrender.com/weather/forecast/${latitude}/${longitude}`
+        );
         const data = await response.json();
         setWeatherData(data);
       } catch (error) {
-        console.error('Error fetching weather data:', error);
+        console.error("Error fetching weather data:", error);
       }
     };
 

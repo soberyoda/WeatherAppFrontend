@@ -1,109 +1,169 @@
-import React, { useState } from 'react';
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, useMediaQuery, Typography, List, ListItem, ListItemText, Grid } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import getWeatherIcon from './_weatherIcons';
-import CircularProgress from '@mui/material/CircularProgress';
+import React, { useState } from "react";
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
+  useMediaQuery,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Grid,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import getWeatherIcon from "./_weatherIcons";
+import CircularProgress from "@mui/material/CircularProgress";
+import WeatherTile from "./_weatherDayTile";
 
-const WeatherTile = ({ day }) => {
-    return (
-      <Paper elevation={3} style={{ padding: '15px', marginBottom: '20px',  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)'}}>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item xs={6} sm={3}>
-            <Typography variant="body1" style={{ color: '#7d7574' }}>Max Temperature:</Typography>
-            <Typography variant="body1">{day.maxTemperature} ℃</Typography>
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Typography variant="body1" style={{ color: '#7d7574' }}>Min Temperature:</Typography>
-            <Typography variant="body1">{day.minTemperature} ℃</Typography>
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Typography variant="body1" style={{ color: '#7d7574' }}>Weather Icon:</Typography>
-            {getWeatherIcon(day.weatherCode)}
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Typography variant="body1" style={{ color: '#7d7574' }}>Estimated Energy:</Typography>
-            <Typography variant="body1">{day.estimatedEnergy} kWh</Typography>
-          </Grid>
-        </Grid>
-      </Paper>
-    );
-  };
-  
-const WeatherForecastTable = ({ weatherData }) => {
+const WeatherForecastTable = ({ weatherData, darkMode}) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [selectedLocation] = useState(null);
 
   if (!weatherData) {
     return <CircularProgress color="secondary" />;
   }
 
   return (
-    <TableContainer component={Paper} elevation={3} sx={{ maxWidth: 790, margin: 'auto', overflow: 'auto'}}>
-      <Table>
-        <TableHead>
-          <TableRow style={{background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'}}>
-            <TableCell align='center' style={{color:'white'}}>{isMobile ? "Today" : "Date"}</TableCell>
-            {!isMobile && (
-              <>
-                <TableCell align='center' style={{color:'white'}}>Weather Icon</TableCell>
-                <TableCell align='center' style={{color:'white'}}>Max Temperature</TableCell>
-                <TableCell align='center' style={{color:'white'}}>Min Temperature</TableCell>
-                <TableCell align='center' style={{color:'white'}}>Estimated Energy</TableCell>
-              </>
-            )}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {weatherData.map((day, index) => (
-            <React.Fragment key={day.date}>
-              {isMobile && index === 0 && (
-                <Grid item xs={12}>
-                  <WeatherTile day={day} isToday={true} />
-                </Grid>
+    <React.Fragment>
+      <TableContainer
+        component={Paper}
+        elevation={3}
+        sx={{ maxWidth: 790, margin: "auto", overflow: "auto", backgroundColor: darkMode ? "rgb(82, 113, 196)" : "#ffffff"}}
+      >
+        <Table>
+          <TableHead>
+            <TableRow
+              sx={{
+                background: darkMode? "linear-gradient(111.3deg, rgb(74, 105, 187) 9.6%, rgb(205, 77, 204) 93.6%)" : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              }}
+            >
+              <TableCell align="center" sx={{ color:"white" }}>
+                {isMobile ? "Today" : "Date"}
+              </TableCell>
+              {!isMobile && (
+                <>
+                  <TableCell align="center" sx={{ color:"white" }}>
+                    Weather Icon
+                  </TableCell>
+                  <TableCell align="center" sx={{ color:"white" }}>
+                    Max Temperature
+                  </TableCell>
+                  <TableCell align="center" sx={{ color:"white" }}>
+                    Min Temperature
+                  </TableCell>
+                  <TableCell align="center" sx={{ color:"white" }}>
+                    Estimated Energy
+                  </TableCell>
+                </>
               )}
-              <TableRow>
-                <TableCell align='center' style={{color:'#000000'}}>
-                  {index === 0 && isMobile ? "Next Days" : new Date(day.date).toLocaleDateString('en-GB')}
-                </TableCell>
-                {!isMobile && (
-                  <>
-                    <TableCell align='center' style={{color:'#7d7574'}}>{getWeatherIcon(day.weatherCode)}</TableCell>
-                    <TableCell align='center' style={{color:'#7d7574'}}>{day.maxTemperature} ℃</TableCell>
-                    <TableCell align='center' style={{color:'#7d7574'}}>{day.minTemperature} ℃</TableCell>
-                    <TableCell align='center' style={{color:'#7d7574'}}>{day.estimatedEnergy} kWh</TableCell>
-                  </>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {weatherData.map((day, index) => (
+              <React.Fragment key={day.date}>
+                {isMobile && index === 0 && (
+                  <Grid item xs={12}>
+                    <WeatherTile day={day} isToday={true} darkMode/>
+                  </Grid>
                 )}
-              </TableRow>
-              {isMobile && index !== 0 && (
-                    <TableRow>
-                    <TableCell colSpan={5} align='center'>
-                        <Grid container spacing={2} justifyContent="space-around">
-                            <Grid item xs={6} sm={3}>
-                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>Max Temp:</Typography>
-                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>{day.maxTemperature} ℃</Typography>
-                            </Grid>
-                            <Grid item xs={6} sm={3}>
-                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>Min Temp:</Typography>
-                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>{day.minTemperature} ℃</Typography>
-                            </Grid>
-                            <Grid item xs={6} sm={3}>
-                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>Weather Icon:</Typography>
-                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>{getWeatherIcon(day.weatherCode)}</Typography>
-                            </Grid>
-                            <Grid item xs={6} sm={3}>
-                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>Estimated Energy:</Typography>
-                                <Typography variant="subtitle1" style={{ color:'#7d7574', fontSize: '0.8rem' }}>{day.estimatedEnergy} kWh</Typography>
-                            </Grid>
-                        </Grid>
-                    </TableCell>
+                <TableRow>
+                  <TableCell align="center" sx={{ color: darkMode ? "white" : "#7d7574" }}>
+                    {index === 0 && isMobile
+                      ? "Next Days"
+                      : new Date(day.date).toLocaleDateString("en-GB")}
+                  </TableCell>
+                  {!isMobile && (
+                    <>
+                      <TableCell align="center">
+                        {getWeatherIcon(day.weatherCode, darkMode)}
+                      </TableCell>
+                      <TableCell align="center" sx={{ color: darkMode ? "white" : "#7d7574" }}>
+                        {day.maxTemperature} ℃
+                      </TableCell>
+                      <TableCell align="center"sx={{ color: darkMode ? "white" : "#7d7574" }}>
+                        {day.minTemperature} ℃
+                      </TableCell>
+                      <TableCell align="center" sx={{ color: darkMode ? "white" : "#7d7574" }}>
+                        {day.estimatedEnergy} kWh
+                      </TableCell>
+                    </>
+                  )}
                 </TableRow>
-            
-              )}
-            </React.Fragment>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                {isMobile && index !== 0 && (
+                  <TableRow>
+                    <TableCell colSpan={5} align="center">
+                      <Grid container spacing={2} justifyContent="space-around">
+                        <Grid item xs={6} sm={3}>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                          >
+                            Max Temp:
+                          </Typography>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                          >
+                            {day.maxTemperature} ℃
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={6} sm={3}>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                          >
+                            Min Temp:
+                          </Typography>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                          >
+                            {day.minTemperature} ℃
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={6} sm={3}>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                          >
+                            Weather Icon:
+                          </Typography>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                          >
+                            {getWeatherIcon(day.weatherCode, darkMode)}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={6} sm={3}>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                          >
+                            Estimated Energy:
+                          </Typography>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                          >
+                            {day.estimatedEnergy} kWh
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                )}
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </React.Fragment>
   );
 };
 
