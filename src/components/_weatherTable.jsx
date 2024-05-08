@@ -19,11 +19,9 @@ import getWeatherIcon from "./_weatherIcons";
 import CircularProgress from "@mui/material/CircularProgress";
 import WeatherTile from "./_weatherDayTile";
 
-const WeatherForecastTable = ({ weatherData, darkMode}) => {
+const WeatherForecastTable = ({ weatherData, darkMode }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [selectedLocation] = useState(null);
-
   if (!weatherData) {
     return <CircularProgress color="secondary" />;
   }
@@ -33,30 +31,37 @@ const WeatherForecastTable = ({ weatherData, darkMode}) => {
       <TableContainer
         component={Paper}
         elevation={3}
-        sx={{ maxWidth: 790, margin: "auto", overflow: "auto", backgroundColor: darkMode ? "rgb(82, 113, 196)" : "#ffffff"}}
+        sx={{
+          maxWidth: 790,
+          margin: "auto",
+          overflow: "auto",
+          backgroundColor: darkMode ? "rgb(82, 113, 196)" : "#ffffff",
+        }}
       >
         <Table>
           <TableHead>
             <TableRow
               sx={{
-                background: darkMode? "linear-gradient(111.3deg, rgb(74, 105, 187) 9.6%, rgb(205, 77, 204) 93.6%)" : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                background: darkMode
+                  ? "linear-gradient(111.3deg, rgb(74, 105, 187) 9.6%, rgb(205, 77, 204) 93.6%)"
+                  : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
               }}
             >
-              <TableCell align="center" sx={{ color:"white" }}>
+              <TableCell align="center" sx={{ color: "white" }}>
                 {isMobile ? "Today" : "Date"}
               </TableCell>
               {!isMobile && (
                 <>
-                  <TableCell align="center" sx={{ color:"white" }}>
+                  <TableCell align="center" sx={{ color: "white" }}>
                     Weather Icon
                   </TableCell>
-                  <TableCell align="center" sx={{ color:"white" }}>
+                  <TableCell align="center" sx={{ color: "white" }}>
                     Max Temperature
                   </TableCell>
-                  <TableCell align="center" sx={{ color:"white" }}>
+                  <TableCell align="center" sx={{ color: "white" }}>
                     Min Temperature
                   </TableCell>
-                  <TableCell align="center" sx={{ color:"white" }}>
+                  <TableCell align="center" sx={{ color: "white" }}>
                     Estimated Energy
                   </TableCell>
                 </>
@@ -68,11 +73,14 @@ const WeatherForecastTable = ({ weatherData, darkMode}) => {
               <React.Fragment key={day.date}>
                 {isMobile && index === 0 && (
                   <Grid item xs={12}>
-                    <WeatherTile day={day} isToday={true} darkMode/>
+                    <WeatherTile day={day} isToday={true} darkMode />
                   </Grid>
                 )}
                 <TableRow>
-                  <TableCell align="center" sx={{ color: darkMode ? "white" : "#7d7574" }}>
+                  <TableCell
+                    align="center"
+                    sx={{ color: darkMode ? "white" : "#7d7574" }}
+                  >
                     {index === 0 && isMobile
                       ? "Next Days"
                       : new Date(day.date).toLocaleDateString("en-GB")}
@@ -82,13 +90,22 @@ const WeatherForecastTable = ({ weatherData, darkMode}) => {
                       <TableCell align="center">
                         {getWeatherIcon(day.weatherCode, darkMode)}
                       </TableCell>
-                      <TableCell align="center" sx={{ color: darkMode ? "white" : "#7d7574" }}>
+                      <TableCell
+                        align="center"
+                        sx={{ color: darkMode ? "white" : "#7d7574" }}
+                      >
                         {day.maxTemperature} ℃
                       </TableCell>
-                      <TableCell align="center"sx={{ color: darkMode ? "white" : "#7d7574" }}>
+                      <TableCell
+                        align="center"
+                        sx={{ color: darkMode ? "white" : "#7d7574" }}
+                      >
                         {day.minTemperature} ℃
                       </TableCell>
-                      <TableCell align="center" sx={{ color: darkMode ? "white" : "#7d7574" }}>
+                      <TableCell
+                        align="center"
+                        sx={{ color: darkMode ? "white" : "#7d7574" }}
+                      >
                         {day.estimatedEnergy} kWh
                       </TableCell>
                     </>
@@ -101,13 +118,19 @@ const WeatherForecastTable = ({ weatherData, darkMode}) => {
                         <Grid item xs={6} sm={3}>
                           <Typography
                             variant="subtitle1"
-                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                            sx={{
+                              color: darkMode ? "white" : "#7d7574",
+                              fontSize: "0.8rem",
+                            }}
                           >
                             Max Temp:
                           </Typography>
                           <Typography
                             variant="subtitle1"
-                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                            sx={{
+                              color: darkMode ? "white" : "#7d7574",
+                              fontSize: "0.8rem",
+                            }}
                           >
                             {day.maxTemperature} ℃
                           </Typography>
@@ -115,13 +138,19 @@ const WeatherForecastTable = ({ weatherData, darkMode}) => {
                         <Grid item xs={6} sm={3}>
                           <Typography
                             variant="subtitle1"
-                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                            sx={{
+                              color: darkMode ? "white" : "#7d7574",
+                              fontSize: "0.8rem",
+                            }}
                           >
                             Min Temp:
                           </Typography>
                           <Typography
                             variant="subtitle1"
-                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                            sx={{
+                              color: darkMode ? "white" : "#7d7574",
+                              fontSize: "0.8rem",
+                            }}
                           >
                             {day.minTemperature} ℃
                           </Typography>
@@ -129,13 +158,19 @@ const WeatherForecastTable = ({ weatherData, darkMode}) => {
                         <Grid item xs={6} sm={3}>
                           <Typography
                             variant="subtitle1"
-                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                            sx={{
+                              color: darkMode ? "white" : "#7d7574",
+                              fontSize: "0.8rem",
+                            }}
                           >
                             Weather Icon:
                           </Typography>
                           <Typography
                             variant="subtitle1"
-                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                            sx={{
+                              color: darkMode ? "white" : "#7d7574",
+                              fontSize: "0.8rem",
+                            }}
                           >
                             {getWeatherIcon(day.weatherCode, darkMode)}
                           </Typography>
@@ -143,13 +178,19 @@ const WeatherForecastTable = ({ weatherData, darkMode}) => {
                         <Grid item xs={6} sm={3}>
                           <Typography
                             variant="subtitle1"
-                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                            sx={{
+                              color: darkMode ? "white" : "#7d7574",
+                              fontSize: "0.8rem",
+                            }}
                           >
                             Estimated Energy:
                           </Typography>
                           <Typography
                             variant="subtitle1"
-                            sx={{ color: darkMode ? "white" : "#7d7574", fontSize: "0.8rem" }}
+                            sx={{
+                              color: darkMode ? "white" : "#7d7574",
+                              fontSize: "0.8rem",
+                            }}
                           >
                             {day.estimatedEnergy} kWh
                           </Typography>
