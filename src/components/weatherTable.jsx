@@ -15,7 +15,7 @@ import {
   Grid,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import getWeatherIcon from "./_weatherIcons";
+import getWeatherIcon from "./weatherIcons";
 import CircularProgress from "@mui/material/CircularProgress";
 import WeatherTile from "./_weatherDayTile";
 
