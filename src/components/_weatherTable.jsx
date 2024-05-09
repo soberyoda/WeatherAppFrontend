@@ -32,7 +32,7 @@ const WeatherForecastTable = ({ weatherData, darkMode }) => {
         component={Paper}
         elevation={3}
         sx={{
-          maxWidth: 790,
+          maxWidth: 750, 
           margin: "auto",
           overflow: "auto",
           backgroundColor: darkMode ? "rgb(82, 113, 196)" : "#ffffff",

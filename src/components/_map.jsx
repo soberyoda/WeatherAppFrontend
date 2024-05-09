@@ -16,7 +16,7 @@ const Map = ({ userLocation }) => {
   return (
     <Box
       sx={{
-        height: "400px",
+        height: 492,
         width: "100%",
         border: "2px solid #ccc",
         borderRadius: "8px",

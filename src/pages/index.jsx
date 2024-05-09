@@ -10,13 +10,13 @@ import {
 } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import useWeatherData from "./components/_useWeatherData";
-import WeatherForecastTable from "./components/_weatherTable";
+import useWeatherData from "../components/_useWeatherData";
+import WeatherForecastTable from "../components/_weatherTable";
 import { makeStyles } from "@mui/styles";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const Map = dynamic(() => import("./components/_map"), {
-  ssr: false
+const Map = dynamic(() => import("../components/_map"), {
+  ssr: false,
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +37,7 @@ const Home = ({ toggleDarkMode, darkMode, userLocation }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
-  
+
   return (
     <Box textAlign="center" padding={2}>
       <Paper
@@ -77,7 +77,7 @@ const Home = ({ toggleDarkMode, darkMode, userLocation }) => {
             <WeatherForecastTable weatherData={weatherData} darkMode={darkMode} />
           </Grid>
           <Grid item xs={12} md={6}>
-          <Map userLocation={userLocation} />
+            <Map userLocation={userLocation} />
           </Grid>
         </Grid>
       </Paper>
