@@ -6,9 +6,8 @@ const useWeatherData = (userLocation) => {
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        if (!userLocation) return; 
-
-        const { lat, lon } = userLocation; 
+        if (!userLocation) return;
+        const { lat, lon } = userLocation;
         const response = await fetch(
           `https://weatherapp-xi8f.onrender.com/weather/forecast/${lat}/${lon}`
         );

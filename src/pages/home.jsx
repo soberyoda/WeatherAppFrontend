@@ -10,12 +10,12 @@ import {
 } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import useWeatherData from "../components/_useWeatherData";
-import WeatherForecastTable from "../components/_weatherTable";
+import useWeatherData from "../components/useWeatherData";
+import WeatherForecastTable from "../components/weatherTable";
 import { makeStyles } from "@mui/styles";
 import dynamic from "next/dynamic";
 
-const Map = dynamic(() => import("../components/_map"), {
+const Map = dynamic(() => import("../components/map"), {
   ssr: false,
 });
 
@@ -74,10 +74,13 @@ const Home = ({ toggleDarkMode, darkMode, userLocation }) => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
-            <WeatherForecastTable weatherData={weatherData} darkMode={darkMode} />
+            <WeatherForecastTable
+              weatherData={weatherData}
+              darkMode={darkMode}
+            />
           </Grid>
           <Grid item xs={12} md={6}>
-            <Map userLocation={userLocation} />
+            <Map userLocation={userLocation} darkMode={darkMode}/>
           </Grid>
         </Grid>
       </Paper>

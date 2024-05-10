@@ -17,7 +17,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import getWeatherIcon from "./weatherIcons";
 import CircularProgress from "@mui/material/CircularProgress";
-import WeatherTile from "./_weatherDayTile";
+import WeatherTile from "./weatherDayTile";
 
 const WeatherForecastTable = ({ weatherData, darkMode }) => {
   const theme = useTheme();
@@ -32,7 +32,7 @@ const WeatherForecastTable = ({ weatherData, darkMode }) => {
         component={Paper}
         elevation={3}
         sx={{
-          maxWidth: 750, 
+          maxWidth: 750,
           margin: "auto",
           overflow: "auto",
           backgroundColor: darkMode ? "rgb(82, 113, 196)" : "#ffffff",

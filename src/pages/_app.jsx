@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { purple } from "@mui/material/colors";
 import { GlobalStyles } from "@mui/material";
-import Home from "./index";
+import Home from "./home";
 import { useEffect } from "react";
 const light = createTheme({
   palette: {
@@ -50,7 +50,11 @@ const App = () => {
     <ThemeProvider theme={darkMode ? dark : light}>
       <CssBaseline />
       <GlobalStyles />
-      <Home toggleDarkMode={toggleDarkMode} darkMode={darkMode} userLocation={userLocation}/>
+      <Home
+        toggleDarkMode={toggleDarkMode}
+        darkMode={darkMode}
+        userLocation={userLocation}
+      />
     </ThemeProvider>
   );
 };
