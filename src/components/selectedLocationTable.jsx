@@ -32,13 +32,13 @@ const SelectedLocationTable = ({ weatherData, darkMode }) => {
         backgroundColor: darkMode ? "rgb(82, 113, 196)" : "#ffffff",
       }}
     >
-      <Table size={isSmallScreen ? "small" : "medium"}>
+      <Table size={ "small" }>
         <TableHead>
           <TableRow>
-            <TableCell align="center" colSpan={2} sx={{ color: darkMode ? "white" : "#7d7574",fontSize: isSmallScreen ? 10 : 12 }}>
+            <TableCell align="center" colSpan={2} sx={{ color: darkMode ? "white" : "#7d7574", fontSize: isSmallScreen ? 10 : 12 }}>
               <strong>Date</strong>
             </TableCell>
-            <TableCell align="center" sx={{ color: darkMode ? "white" : "#7d7574" ,fontSize: isSmallScreen ? 10 : 12 }}>
+            <TableCell align="center" sx={{ color: darkMode ? "white" : "#7d7574", fontSize: isSmallScreen ? 10 : 12 }}>
               <strong>Weather icon</strong>
             </TableCell>
             <TableCell align="center" sx={{color: darkMode ? "white" : "#7d7574", fontSize: isSmallScreen ? 10 : 12 }}>
