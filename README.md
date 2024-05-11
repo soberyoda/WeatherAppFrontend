@@ -1,3 +1,4 @@
+<details><summary><b>Fork README.md</b></summary>
 # Next.js Hello World
 
 
@@ -21,3 +22,16 @@ Click the button below to deploy this app on Render.
 2. Commit the code changes to your repository.
 
 3. Click the Deploy to Render button.
+</details>
+
+## Weather Forecast Frontend
+
+### Tech Stack
+<div >
+<img width="50" src="https://user-images.githubusercontent.com/25181517/189716630-fe6c084c-6c66-43af-aa49-64c8aea4a5c2.png" alt="Material UI" title="Material UI"/>	<img width="50" src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png" alt="JavaScript" title="JavaScript"/>
+<img width="50" src="https://github.com/marwin1991/profile-technology-icons/assets/136815194/5f8c622c-c217-4649-b0a9-7e0ee24bd704" alt="Next.js" title="Next.js"/><img width="50" src="https://upload.wikimedia.org/wikipedia/commons/1/13/Leaflet_logo.svg" alt="Next.js" title="Next.js"/>
+</div>
+<ul>
+    <li>Next.js</li>
+    <li>Material UI</li>
+</ul>
