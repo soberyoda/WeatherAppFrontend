@@ -53,5 +53,5 @@ Weather Forecast App for the Next 7 Days for User's Location. It is possible to 
 <img width="300" src="./assets/responsive.png" alt="page_light_Mode" title = "Page_light_mode"/>
 <img width="300" src="./assets/responsive_dark.png" alt="page_dark_Mode" title = "Page_dark_mode"/>
 
-#### Weather in Choosen Location 
+#### Weather conditions in the chosen location
 <img width="600" src="./assets/map_one_more.png" alt="map" title = "Map"/>
