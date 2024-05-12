@@ -54,4 +54,4 @@ Weather Forecast App for the Next 7 Days for User's Location. It is possible to 
 <img width="300" src="./assets/responsive_dark.png" alt="page_dark_Mode" title = "Page_dark_mode"/>
 
 #### Weather in Choosen Location 
-<img width="600" src="./assets/animiertes-gif-von-online-umwandeln-de(2).gif" alt="map_gif" title = "Map gif"/>
+<img width="600" src="./assets/map_one_more.png" alt="map" title = "Map"/>
